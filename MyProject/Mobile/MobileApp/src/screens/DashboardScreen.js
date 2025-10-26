@@ -6,16 +6,33 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function DashboardScreen({navigation}) {
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('user');
+    } catch (e) {
+      console.warn('Failed to clear storage', e);
+    }
+    navigation.reset({ index: 0, routes: [{ name: 'Landing' }] });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.dashboardText}>Welcome to the Dashboard</Text>
         <TouchableOpacity
           style={styles.logoutButton}
-          onPress={() => navigation.navigate('Landing')}>
+          onPress={() =>
+            Alert.alert('Confirm', 'Logout?', [
+              { text: 'Cancel', style: 'cancel' },
+              { text: 'Logout', style: 'destructive', onPress: handleLogout },
+            ])
+          }>
           <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
       </View>

@@ -3,6 +3,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LandingScreen from '../screens/LandingScreen';
 import LoginScreen from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import AdminScreen from '../screens/AdminScreen';
 
@@ -30,6 +31,11 @@ function AppNavigator() {
         name="Login"
         component={LoginScreen}
         options={{title: 'Login'}}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{title: 'Create Account'}}
       />
       <Stack.Screen
         name="Dashboard"

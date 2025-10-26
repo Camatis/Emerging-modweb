@@ -8,13 +8,15 @@ export default function DashboardScreen(){
 
   function signOut(){
     useAuthStore.getState().clearUser()
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
     navigate('/')
   }
 
   return (
     <div className="screen">
       <h1>Dashboard</h1>
-      <p>Welcome {user?.email ?? 'guest'}.</p>
+      <p>Welcome {user?.username ?? 'guest'}.</p>
       <button onClick={signOut}>Sign out</button>
     </div>
   )

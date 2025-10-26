@@ -1,0 +1,59 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+/Web/dist/
+/Mobile/MobileApp/build/
+/Mobile/MobileApp/android/app/build/
+/Mobile/MobileApp/ios/build/
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Mobile specific
+/Mobile/MobileApp/ios/Pods/
+/Mobile/MobileApp/.bundle/
+/Mobile/MobileApp/vendor/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android specific
+/Mobile/MobileApp/android/.gradle
+/Mobile/MobileApp/android/build
+/Mobile/MobileApp/android/app/debug
+/Mobile/MobileApp/android/app/release
+*.keystore
+!debug.keystore
+local.properties
+
+# Log files
+*.log
+
+# System files
+.DS_Store
+Thumbs.db

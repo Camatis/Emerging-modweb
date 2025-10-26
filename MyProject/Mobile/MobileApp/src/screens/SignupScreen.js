@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import {
   View,
@@ -12,45 +11,41 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {API_URL} from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function LoginScreen({navigation}) {
+function SignupScreen({navigation}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async () => {
-    if (!username || !password) {
+  const handleSignup = async () => {
+    if (!username || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Passwords do not match');
       return;
     }
 
     setIsLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, {
+      await axios.post(`${API_URL}/auth/register`, {
         username,
         password,
       });
 
-      const {token, user} = response.data;
-
-      // Store token for later authenticated requests
-      try {
-        await AsyncStorage.setItem('token', token);
-        await AsyncStorage.setItem('user', JSON.stringify(user));
-      } catch (e) {
-        console.warn('Failed to save token', e);
-      }
-
-      if (user.role === 'admin') {
-        navigation.replace('Admin');
-      } else {
-        navigation.replace('Dashboard');
-      }
+      Alert.alert('Success', 'Account created successfully!', [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('Login'),
+        },
+      ]);
     } catch (error) {
       Alert.alert(
         'Error',
-        error.response?.data?.message || 'Login failed. Please try again.',
+        error.response?.data?.message || 'Registration failed. Please try again.',
       );
     } finally {
       setIsLoading(false);
@@ -60,14 +55,14 @@ function LoginScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.subtitle}>Enter your credentials to continue</Text>
+        <Text style={styles.title}>Create Account</Text>
+        <Text style={styles.subtitle}>Sign up to get started</Text>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Username</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your username"
+            placeholder="Choose a username"
             value={username}
             onChangeText={setUsername}
             autoCapitalize="none"
@@ -78,30 +73,39 @@ function LoginScreen({navigation}) {
           <Text style={styles.label}>Password</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your password"
+            placeholder="Choose a password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
           />
         </View>
 
-        <TouchableOpacity 
-          style={[styles.button, isLoading && styles.buttonDisabled]} 
-          onPress={handleLogin}
-          disabled={isLoading}
-        >
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Confirm Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm your password"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+          />
+        </View>
+
+        <TouchableOpacity
+          style={[styles.button, isLoading && styles.buttonDisabled]}
+          onPress={handleSignup}
+          disabled={isLoading}>
           {isLoading ? (
             <ActivityIndicator color="#fff" />
           ) : (
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Create Account</Text>
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.linkButton}
-          onPress={() => navigation.navigate('Signup')}
-        >
-          <Text style={styles.linkText}>Create Account</Text>
+          onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.linkText}>Already have an account? Login</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -154,6 +158,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     elevation: 3,
   },
+  buttonDisabled: {
+    opacity: 0.7,
+  },
   buttonText: {
     color: '#fff',
     fontSize: 18,
@@ -169,4 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;

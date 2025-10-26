@@ -1,0 +1,49 @@
+Naka connect na ni siya sa server? 
+
+wy kamo nag gamit React Native? 
+
+ah, sa git lang kamo nag run
+
+bale ga usar kamo Android Studio for what purpose gali
+if pwd lang kamo ka gamit VS Code?
+
+diri ko nalang sa android studio gina run ang app sir para ka simulate sang device.
+
+okay man siya, although if mobile dev ang role mo sa industry, the standard must be 
+in the VC Code, pero if Android Developer ang imo role, it doesn't matter 
+if sa android studio ka ma base. Pero goods naman siya, e check ko lang ang progression
+nyo, btw maka connect na ni sa server?
+
+so far, wala ko pa siya na connect sa server sir.
+
+no problem ah, pero next week dpat may communication na sila.
+
+kay need na ang User Management sa inyo web app. 
+
+and need ang User Table sa inyo System 
+
+		- User Table
+			- userName
+			- password (hashed)
+			- userRole
+			- email
+			- contactNo 
+
+for the React/React Native, pwd kamo ka usar local storage para ma save nyo ang role 
+sang user nga naka login. e.g. Admin siya, pag login nya sa web, 
+pwd siya ka navigate sa e.g. UserManagementPage. pero kun user lang siya, 
+dapat indi ni kitaon ang UserManagementPage. So amo na ang purpose sang role. 
+
+note mo man nga indi pwd si admin mka login sa mobile, while si user pwd 
+ka login both web and mobile. 
+
+gets man? 
+
+yes sir.
+
+if may question ka, feel free to ask or e chat lang ko sa messenger. 
+
+goods naman ni, connection and update lang sa DB ang need nyo as well as ang mga request
+sang server. good job ah.  
+
+thank you sir
